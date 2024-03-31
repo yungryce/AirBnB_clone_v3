@@ -3,7 +3,6 @@
 Contains the class DBStorage
 """
 
-import models
 from models.amenity import Amenity
 from models.base_model import Base
 from models.city import City
@@ -41,20 +40,23 @@ class DBStorage:
             Base.metadata.drop_all(self.__engine)
 
     def all(self, cls=None):
-        """returns a dictionary of all the objects present"""
-        if not self.__session:
-            self.reload()
-        objects = {}
-        if type(cls) == str:
-            cls = classes.get(cls, None)
+        """
+           returns a dictionary of all objects
+        """
+        obj_dict = {}
         if cls:
-            for obj in self.__session.query(cls):
-                objects[obj.__class__.__name__ + '.' + obj.id] = obj
-        else:
-            for cls in classes.values():
-                for obj in self.__session.query(cls):
-                    objects[obj.__class__.__name__ + '.' + obj.id] = obj
-        return objects
+            a_query = self.__session.query(classes[cls.__name__])
+            for obj in a_query:
+                obj_ref = "{}.{}".format(type(obj).__name__, obj.id)
+                obj_dict[obj_ref] = obj
+            return obj_dict
+
+        for c in classes.values():
+            a_query = self.__session.query(c)
+            for obj in a_query:
+                obj_ref = "{}.{}".format(type(obj).__name__, obj.id)
+                obj_dict[obj_ref] = obj
+        return obj_dict
 
     def new(self, obj):
         """add the object to the current database session"""
@@ -81,23 +83,14 @@ class DBStorage:
         """call remove() method on the private session attribute"""
         self.__session.remove()
 
-    def get(self, cls, id):
-        """Retrieve an object"""
-        if cls is not None and type(cls) is str and id is not None and\
-           type(id) is str and cls in classes:
-            cls = classes[cls]
-            result = self.__session.query(cls).filter(cls.id == id).first()
-            return result
-        else:
-            return None
+    def get(self, cls=None, id=None):
+        """Returns obj based on class name and its ID"""
+        if cls is not None and id is not None:
+            try:
+                return self.__session.query(classes[cls.__name__]).get(id)
+            except:
+                return None
 
     def count(self, cls=None):
         """Count number of objects in storage"""
-        total = 0
-        if type(cls) == str and cls in classes:
-            cls = classes[cls]
-            total = self.__session.query(cls).count()
-        elif cls is None:
-            for cls in classes.values():
-                total += self.__session.query(cls).count()
-        return total
+        return (len(self.all(cls)))
