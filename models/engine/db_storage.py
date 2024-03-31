@@ -45,7 +45,7 @@ class DBStorage:
         """
         obj_dict = {}
         if cls:
-            a_query = self.__session.query(classes[cls.__name__])
+            a_query = self.__session.query(classes[cls])
             for obj in a_query:
                 obj_ref = "{}.{}".format(type(obj).__name__, obj.id)
                 obj_dict[obj_ref] = obj
@@ -85,9 +85,9 @@ class DBStorage:
 
     def get(self, cls=None, id=None):
         """Returns obj based on class name and its ID"""
-        if cls is not None and id is not None:
+        if cls and id:
             try:
-                return self.__session.query(classes[cls.__name__]).get(id)
+                return self.__session.query(classes[cls]).get(id)
             except:
                 return None
 
