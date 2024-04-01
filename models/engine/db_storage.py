@@ -96,5 +96,5 @@ class DBStorage:
         if cls and cls not in classes:
             return 0
         if not cls:
-            return(len(self.all()))
-        return (len(self.all(cls)))
+            return len(self.all())
+        return len(self.all(cls))
