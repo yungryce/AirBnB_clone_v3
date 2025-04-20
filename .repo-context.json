@@ -1,0 +1,91 @@
+{
+  "project_identity": {
+    "name": "AirBnB Clone v3",
+    "type": "education",
+    "scope": "repository",
+    "is_independent": false,
+    "version": "v3",
+    "related_versions": ["v1", "v2", "v4"],
+    "description": "AirBnB clone with RESTful API for programmatic access to data"
+  },
+  "tech_stack": {
+    "primary": ["Python 3.x", "Flask", "MySQL", "SQLAlchemy", "REST API"],
+    "secondary": ["JSON", "CORS", "Swagger/Flasgger", "HTTP"],
+    "key_libraries": ["flask", "flask_cors", "sqlalchemy", "flasgger", "werkzeug"]
+  },
+  "skill_manifest": {
+    "technical": [
+      "RESTful API Design",
+      "HTTP Protocol",
+      "API Documentation",
+      "Authentication & Authorization",
+      "CORS Implementation",
+      "JSON Data Handling",
+      "Error Handling",
+      "Route Definition",
+      "Query Parameter Processing",
+      "Cross-Origin Resource Sharing"
+    ],
+    "domain": [
+      "Travel Platform Design",
+      "Booking System Architecture",
+      "Property Management API",
+      "User Authentication",
+      "Search Functionality"
+    ]
+  },
+  "components": {
+    "api": {
+      "type": "interface",
+      "path": "/api",
+      "description": "RESTful API for programmatic access to data"
+    },
+    "api_views": {
+      "type": "controllers",
+      "path": "/api/v1/views",
+      "description": "API route handlers for different resources"
+    },
+    "models": {
+      "type": "core",
+      "path": "/models",
+      "description": "Data models with enhanced storage capabilities"
+    },
+    "storage": {
+      "type": "persistence",
+      "path": "/models/engine",
+      "description": "Storage engines with get and count methods"
+    },
+    "console": {
+      "type": "interface",
+      "path": "/console.py",
+      "description": "Command-line interpreter for CRUD operations"
+    },
+    "tests": {
+      "type": "quality",
+      "path": "/tests",
+      "description": "Unit and integration tests including API tests"
+    }
+  },
+  "progression": {
+    "v1": {
+      "description": "Command-line functionality with file storage",
+      "tech_stack": ["Python", "JSON"],
+      "features": ["BaseModel", "File Storage", "Command Interpreter"]
+    },
+    "v2": {
+      "description": "Database integration and web application",
+      "tech_stack": ["Python", "MySQL", "SQLAlchemy", "Flask"],
+      "features": ["ORM Mapping", "MySQL Storage", "Web Application"]
+    },
+    "v3": {
+      "description": "RESTful API implementation",
+      "tech_stack": ["Python", "Flask", "REST API", "CORS"],
+      "features": ["API Endpoints", "CORS Support", "Enhanced Storage Methods", "API Documentation"]
+    },
+    "v4": {
+      "description": "Dynamic web interface (planned)",
+      "tech_stack": ["JavaScript", "jQuery", "HTML5", "CSS3"],
+      "features": ["Dynamic Content", "API Integration"]
+    }
+  }
+}
